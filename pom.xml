@@ -140,6 +140,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -164,6 +165,8 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<!-- 指明编译源代码时使用的字符编码， maven编译的时候默认使用操作系统的GBK编码 -->
+					<encoding>utf8</encoding>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
@@ -177,6 +180,42 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+
+			<!-- 自动部署插件 -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.5.0</version>
+				<!-- 不做任何配置，则默认jetty服务器 -->
+				<configuration>
+					<container>
+						<containerId>tomcat8x</containerId>
+						<type>installed</type>
+						<!-- 覆盖上面的配置，会安装tomcat进行发布，上面是指定到本地安装的路径，需要先启动tomcat，此处直接mvn -P cargo:run即可打包部署 -->
+						<zipUrlInstaller>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.15/bin/apache-tomcat-8.5.15.zip</url>
+							<downloadDir>${project.build.directory}/downloads</downloadDir>
+							<extractDir>${project.build.directory}/extracts</extractDir>
+						</zipUrlInstaller>
+					</container>
+
+					<!-- 
+					 <container>
+						<containerId>tomcat8x</containerId>
+						<type>installed</type>
+						<home>F:/CodeEnvironment/apache-tomcat-8.5.8</home>
+					</container>
+					<configuration>
+						<type>existing</type>
+						<home>F:/CodeEnvironment/apache-tomcat-8.5.8</home>
+					</configuration>
+					 -->
+
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
+
 </project>
