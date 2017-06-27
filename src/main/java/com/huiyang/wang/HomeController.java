@@ -16,7 +16,7 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/hi", method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("bang", "super geek！");
 		return "home";
