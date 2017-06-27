@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- in-memory database and a datasource -->
+	<bean  id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/multi_oa_pay?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" />
+		<property name="username" value="root" />
+		<property name="password" value="Wanghy.1122" />
+	</bean >
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- transaction manager, use DataSourceTransactionManager" for JDBC local 
+		tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- enable transaction demarcation with annotations -->
+	<tx:annotation-driven />
+
+	<!-- scan for mappers and let them be autowired <mybatis:scan base-package="com.huiyang.wang.mapper" 
+		/> -->
+
+	<!-- 可用逗号或者分号隔开写多个路径，路径下的mapper类会被自动， 映射器mapper会被自动被解析并交给spring管理 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.huiyang.wang.mapper" />
+	</bean>
+	<!-- spring 注解支持 -->
+	<context:component-scan base-package="com.huiyang.wang" />
+</beans>
