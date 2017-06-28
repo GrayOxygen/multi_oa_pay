@@ -15,13 +15,14 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<!-- in-memory database and a datasource -->
-	<bean  id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/multi_oa_pay?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" />
 		<property name="username" value="root" />
 		<property name="password" value="Wanghy.1122" />
-	</bean >
+	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -46,4 +47,10 @@
 	</bean>
 	<!-- spring 注解支持 -->
 	<context:component-scan base-package="com.huiyang.wang" />
+
+
+
+	<bean id="weixinService" class="com.saysth.weixin.sdk.util.WeixinService">
+		<property name="wxServiceUrl" value="http://119.147.54.147/weixin-service" />
+	</bean>
 </beans>

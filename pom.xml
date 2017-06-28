@@ -141,6 +141,16 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>weixin-common</groupId>
+			<artifactId>weixin-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saysth.galaxy</groupId>
+			<artifactId>galaxy-commons</artifactId>
+			<version>1.0.7</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -199,17 +209,10 @@
 						</zipUrlInstaller>
 					</container>
 
-					<!-- 
-					 <container>
-						<containerId>tomcat8x</containerId>
-						<type>installed</type>
-						<home>F:/CodeEnvironment/apache-tomcat-8.5.8</home>
-					</container>
-					<configuration>
-						<type>existing</type>
-						<home>F:/CodeEnvironment/apache-tomcat-8.5.8</home>
-					</configuration>
-					 -->
+					<!-- <container> <containerId>tomcat8x</containerId> <type>installed</type> 
+						<home>F:/CodeEnvironment/apache-tomcat-8.5.8</home> </container> <configuration> 
+						<type>existing</type> <home>F:/CodeEnvironment/apache-tomcat-8.5.8</home> 
+						</configuration> -->
 
 				</configuration>
 			</plugin>
