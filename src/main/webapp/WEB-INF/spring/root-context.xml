@@ -48,9 +48,21 @@
 	<!-- spring 注解支持 -->
 	<context:component-scan base-package="com.huiyang.wang" />
 
-
-
+	<!-- 注入微信service -->
 	<bean id="weixinService" class="com.saysth.weixin.sdk.util.WeixinService">
 		<property name="wxServiceUrl" value="http://119.147.54.147/weixin-service" />
 	</bean>
+
+	<!-- 定义受环境影响易变的变量 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath*:/application.properties</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>

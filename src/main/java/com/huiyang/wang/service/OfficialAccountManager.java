@@ -22,7 +22,6 @@ import com.saysth.weixin.sdk.util.WeixinService;
 /**
  * 公众号管理类，和公众号高度相关的行为请聚合于该类
  * 
- * @author KelvinZ
  */
 @Service
 public class OfficialAccountManager {
@@ -121,7 +120,8 @@ public class OfficialAccountManager {
 	public void batchDelete(String[] ids) {
 		oaDao.batchSoftOpt(true, Arrays.asList(ids));
 	}
-
+	
+	@Transactional
 	public void update(OfficialAccount module) {
 		module.setMtime(new Date());
 		oaDao.save(module);

@@ -16,6 +16,7 @@ public enum PayType implements Labeled {
 		this.label = label;
 	}
 
+	@Override
 	public String getLabel() {
 		return this.label;
 	}

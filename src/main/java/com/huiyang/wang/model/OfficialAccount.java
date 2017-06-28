@@ -46,6 +46,7 @@ public class OfficialAccount extends UnDeletedEntity<String> implements Official
 		this.appId = appId;
 	}
 
+	@Override
 	public String getSecret() {
 		return secret;
 	}

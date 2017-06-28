@@ -19,6 +19,7 @@ public enum PayOrderStatus implements Labeled {
 		this.label = label;
 	}
 
+	@Override
 	public String getLabel() {
 		return label;
 	}

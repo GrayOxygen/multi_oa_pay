@@ -6,12 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.jdbc.SQL;
-
-import com.huiyang.wang.mapper.PayOrderMapper.DynaSqlProvider;
 import com.huiyang.wang.model.OfficialAccount;
-import com.huiyang.wang.model.PayOrder;
 
 /**
  * 公众号Mapper

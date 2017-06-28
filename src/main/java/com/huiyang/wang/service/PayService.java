@@ -1,8 +1,8 @@
 package com.huiyang.wang.service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,7 +26,6 @@ import com.saysth.weixin.sdk.enums.YesNoType;
 import com.saysth.weixin.sdk.exception.WeixinException;
 import com.saysth.weixin.sdk.pay.entity.OrderQuery;
 import com.saysth.weixin.sdk.pay.entity.OrderQueryResult;
-import com.saysth.weixin.sdk.pay.entity.PayResult;
 import com.saysth.weixin.sdk.pay.entity.UnifiedOrder;
 import com.saysth.weixin.sdk.pay.entity.UnifiedOrderResult;
 import com.saysth.weixin.sdk.pay.enums.TradeState;
@@ -61,7 +60,7 @@ public class PayService implements InitializingBean {
 		// order.setMchId(oa.getMchId());
 		order.setAppId(oa.getAppid());
 		order.setMchId(oa.getMchId());
-
+		order.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		order.setSubAppId(childOA.getAppId());
 		order.setSubMchId(childOA.getMchId());
 		order.setTradeType(TradeType.JSAPI);
@@ -85,7 +84,7 @@ public class PayService implements InitializingBean {
 				order.setStatus(PayOrderStatus.COMMITTED);
 				order.setPrepayId(result.getPrepay_id());
 				order.setCodeUrl(result.getCode_url());
-				payOrderMapper.save(order);
+				payOrderMapper.update(order);
 				log.info("charge order committed,orderId:{}, ", order.getId());
 				return order;
 			} else {

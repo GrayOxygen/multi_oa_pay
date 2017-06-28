@@ -17,11 +17,13 @@ import com.saysth.commons.utils.json.JsonUtils;
  */
 public abstract class BaseEntity implements IdEntity<String>, Serializable {
 	private String id;
+	@Override
 	@NotNull
 	public String getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		// 如id值为空，则赋值为null
 		this.id = id;
