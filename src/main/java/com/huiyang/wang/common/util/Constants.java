@@ -1,4 +1,11 @@
 package com.huiyang.wang.common.util;
+
+/**
+ * 
+ * @author 王辉阳
+ * @date 2017年7月4日 下午3:01:32
+ * @Description 常量
+ */
 public interface Constants {
 	// DATE & TIME
 	interface TIME {

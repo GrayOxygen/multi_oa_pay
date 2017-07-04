@@ -2,15 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd 
-	http://www.springframework.org/schema/jdbc 
-	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-	http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
-	">
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
@@ -50,7 +47,7 @@
 
 	<!-- 注入微信service -->
 	<bean id="weixinService" class="com.saysth.weixin.sdk.util.WeixinService">
-		<property name="wxServiceUrl" value="http://119.147.54.147/weixin-service" />
+		<property name="wxServiceUrl" value="${weixin_service}" />
 	</bean>
 
 	<!-- 定义受环境影响易变的变量 -->
@@ -61,8 +58,40 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:/application.properties</value>
+				<value>classpath:redis.properties</value><!-- 如果是类路径下这样加载 -->
 			</list>
 		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
 	</bean>
+
+	<!--jedis工厂配置连接 -->
+	<bean id="jedisConnFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:database="${redis.database}" p:hostName="${redis.hostName}" p:port="${redis.port}"
+		p:use-pool="true" p:poolConfig-ref="jedisPoolConfig" />
+
+	<!-- 配置redis池，依次为最大实例数，最大空闲实例数，(创建实例时)最大等待时间，(创建实例时)是否验证 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最大实例数 -->
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<!-- 最大空闲实例数 -->
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<!-- 创建实例时最长等待时间 -->
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+		<!-- Sends a PING request when you ask for the resource -->
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnFactory" p:keySerializer-ref="keySerializer"
+		p:valueSerializer-ref="keySerializer">
+	</bean>
+
+	<bean id="keySerializer"
+		class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+
+	<bean id="valueSerializer"
+		class="org.springframework.data.redis.serializer.StringRedisSerializer" />
 
 </beans>

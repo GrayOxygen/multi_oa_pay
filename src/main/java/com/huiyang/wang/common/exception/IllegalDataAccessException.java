@@ -2,9 +2,6 @@ package com.huiyang.wang.common.exception;
 
 /**
  * 非法数据访问
- * 
- * @author KelvinZ
- * 
  */
 @SuppressWarnings("serial")
 public class IllegalDataAccessException extends AppException {

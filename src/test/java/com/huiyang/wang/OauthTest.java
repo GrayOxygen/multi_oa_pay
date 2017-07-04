@@ -14,6 +14,7 @@ import com.huiyang.wang.service.OfficialAccountManager;
 import com.huiyang.wang.service.PayService;
 import com.saysth.weixin.sdk.exception.WeixinException;
 import com.saysth.weixin.sdk.pay.client.LocalHttpClient;
+import com.saysth.weixin.sdk.util.WeixinService;
 
 @SuppressWarnings("all")
 @TestPropertySource("/application.properties")
@@ -23,6 +24,8 @@ public class OauthTest extends AbstractJUnit4SpringContextTests {
 	private OfficialAccountManager oaMgr;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private WeixinService  weixinService;
 
 	@Test
 	public void oauth() {
@@ -66,4 +69,8 @@ public class OauthTest extends AbstractJUnit4SpringContextTests {
 		LocalHttpClient.initMchKeyStore("1483579272");
 	}
 
+	@Test
+	public void teddd(){
+System.out.println(weixinService.getAccessToken("wx737ad133237892d7", "af7b6b5474fc4cba69682344500c1b98"));
+	}
 }

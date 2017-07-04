@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
 import com.huiyang.wang.model.OfficialAccount;
 
 /**
@@ -31,7 +32,7 @@ public interface OfficialAccountMapper {
 					"#{item}" + //
 					"</foreach>", //
 			"</script>" })
-	void batchSoftOpt(@Param("deleted") boolean deleted,@Param("list")   List<String> list);
+	void batchSoftOpt(@Param("deleted") boolean deleted, @Param("list") List<String> list);
 
 	@Update({ "<script>", //
 			"UPDATE official_account " + //

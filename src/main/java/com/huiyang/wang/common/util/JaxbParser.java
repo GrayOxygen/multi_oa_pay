@@ -24,7 +24,6 @@ public class JaxbParser {
 
 	private String[] cdataNode;
 
-
 	private JaxbParser() {
 		super();
 	}
@@ -42,7 +41,6 @@ public class JaxbParser {
 		this.cdataNode = cdataNode;
 		return this;
 	}
-
 
 	/**
 	 * 转为xml串
@@ -68,7 +66,6 @@ public class JaxbParser {
 		logger.debug("to text:{}", result);
 		return result;
 	}
-
 
 	public <T> T toObj(Class<T> clazz, Reader reader) {
 		JAXBContext context;

@@ -6,8 +6,6 @@ import com.saysth.commons.entity.UnDeletable;
 
 /**
  * 不可删实体
- *
- * @author KelvinZ
  */
 public abstract class UnDeletedEntity<PK extends Serializable> extends BaseEntity implements UnDeletable {
 	private Boolean deleted;

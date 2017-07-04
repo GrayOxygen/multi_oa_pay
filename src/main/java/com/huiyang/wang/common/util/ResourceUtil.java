@@ -14,6 +14,12 @@ import org.slf4j.LoggerFactory;
 import com.saysth.commons.utils.SystemConfig;
 import com.saysth.commons.utils.io.FileUtils;
 
+/**
+ * 
+ * @author 王辉阳
+ * @date 2017年7月4日 下午3:02:27
+ * @Description 读取资源文件
+ */
 public class ResourceUtil {
 	private final static Logger log = LoggerFactory.getLogger(ResourceUtil.class);
 

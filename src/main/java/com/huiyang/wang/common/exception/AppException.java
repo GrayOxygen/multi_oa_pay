@@ -2,8 +2,6 @@ package com.huiyang.wang.common.exception;
 
 /**
  * 常规异常
- *
- * @author KelvinZ
  */
 @SuppressWarnings("serial")
 public class AppException extends Exception {
