@@ -18,10 +18,10 @@ public class OfficialAccount extends UnDeletedEntity<String> implements Official
 	private String name; // 名称
 	private String appId;
 	private String secret;
-	private String mchId;
+	private String mchId;//商户id
 	private String key;// 交易签名算法key
 						// key设置路径：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
-	private PayType type;
+	private PayType type;//商户类型：服务商或普通商户
 	private Date ctime = new Date();
 	private Date mtime;
 	// 微信 公众号模板消息id

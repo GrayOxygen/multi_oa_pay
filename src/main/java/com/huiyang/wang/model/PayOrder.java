@@ -11,6 +11,14 @@ import com.saysth.weixin.sdk.pay.entity.UnifiedOrder;
 import com.saysth.weixin.sdk.pay.enums.TradeState;
 import com.saysth.weixin.sdk.pay.enums.TradeType;
 
+/**
+ * 
+ * @author 王辉阳
+ * @date 2017年7月4日 下午11:07:44
+ * @Description 注意：调用支付接口时，商户有个加密文件，在支付时需要用到
+ *              </p>
+ *              (服务商的时候需要用到.p12的文件，windows下将商户号.p12放到d:/cert文件夹下(d:/cert/mchId.p12)，linux下位置为/home/tomcat/mchId.p12)
+ */
 public class PayOrder extends UnDeletedEntity<String> {
 	private String appId;// 公众账号ID
 	private String mchId;// 微信支付分配的商户号
