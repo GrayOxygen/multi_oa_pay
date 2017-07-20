@@ -1,0 +1,339 @@
+/* 
+* @Author: anchen
+* @Date:   2015-12-10 11:56:15
+* @Last Modified by:   anchen
+* @Last Modified time: 2015-12-14 19:00:41
+*/
+@charset 'utf-8';
+html,
+body,
+.wrap {
+    height: 100%;
+    min-width: 320px;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #e6284a;
+}
+
+header {
+    width: 100%;
+    height: 15.36rem;
+    padding-top: 1rem;
+    background: url("../img/template2/lottery.png") center center no-repeat;
+    background-size: contain;
+}
+
+header .logo {
+    width: 5.9rem;
+    height: 5.9rem;
+    margin: 0 auto 1rem;
+}
+
+header .logo img {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+header h1 {
+    overflow: hidden;
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    font-size: 2.56rem;
+    font-weight: bold;
+    color: #fcbe00;
+}
+
+article {
+    position: relative;
+    top: -4.16rem;
+    left: 0;
+    /*height: 30.76rem;*/
+}
+
+article section {
+    width: 78%;
+    height: 20.83rem;
+    margin: 0 auto 3.08rem;
+    padding: 1.07rem 0 1.07rem 3%;
+    background-color: #381102;
+    border-radius: 0.53rem;
+    box-shadow: 1rem 1rem 1rem 0 rgba(44, 2, 16, 0.25);
+}
+
+article section ul {
+    height: 20.83rem;
+}
+
+section ul li {
+    float: left;
+    width: 6.22rem;
+    height: 1.02rem;
+    padding-top: 5.2rem;
+    margin: 0 3% 0.75rem 0;
+    border-radius: 0.73rem;
+}
+
+section ul .bot {
+    box-shadow: 0 0.11rem 0 0 #fa6882, 0 0.46rem 0 0 #a60000;
+}
+
+section li em {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 0.67rem;
+    color: #8a071b;
+}
+
+section li strong {
+    display: block;
+    width: 100%;
+    height: 4.33rem;
+    line-height: 2.165rem;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.48rem;
+    color: #fffefe;
+}
+
+article .copyright {
+    height: 1rem;
+    margin: 1.38rem 0;
+    line-height: 1rem;
+    font-size: 0.71rem;
+    color: #fffefe;
+    text-align: center;
+}
+
+article .rule {
+    overflow: hidden;
+    display: block;
+    width: 25%;
+    height: 1rem;
+    margin: 1.38rem auto 2rem;
+    line-height: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #fbbc00;
+    background: url("../img/open.png") right center no-repeat;
+    background-size: 14% 65%;
+}
+
+article h2 {
+    overflow: hidden;
+    display: none;
+    width: 50%;
+    height: 1rem;
+    margin: 0 auto 1.76rem;
+    line-height: 1rem;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-align: center;
+    color: #fbbc00;
+}
+
+article .record {
+    display: none;
+    overflow: hidden;
+    margin-bottom: 1.38rem;
+    color: #fbbc00;
+}
+
+article .record li {
+    overflow: hidden;
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 9%;
+    text-align: left;
+    color: white;
+}
+
+article .record em {
+    overflow: hidden;
+    height: 2rem;
+    line-height: 2rem;
+    color: white;
+}
+
+article .record strong {
+    height: 2rem;
+    line-height: 2rem;
+    color: white;
+}
+footer {
+    display: none;
+    padding: 0 9% 1rem;
+}
+footer p {
+    line-height: 1.3rem;
+    font-size: 0.71rem;
+    color: #fffefe;
+}
+/********* 中奖 *********/
+.winning {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7) url("../img/template2/winning.png") 80% 5.53rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 100;
+}
+
+.winning .next {
+    position: relative;
+    top: 20rem;
+    height: 2.43rem;
+    margin: 0 20%;
+}
+.winning .next strong {
+    position: absolute;
+    top: -7rem;
+    left: -7%;
+    width: 58%;
+    height: 4.86rem;
+    margin-right: 4%;
+    line-height: 2.43rem;
+    letter-spacing: .08rem;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    color: white;
+}
+.winning .next span {
+    float: left;
+    width: 48%;
+    height: 2.43rem;
+    margin-right: 4%;
+    line-height: 2.43rem;
+    text-align: center;
+    font-size: 1.28rem;
+    color: white;
+    background-color: #b1aaab;
+    border-radius: 0.64rem;
+}
+
+.winning .next em {
+    float: left;
+    width: 48%;
+    height: 2.43rem;
+    line-height: 2.43rem;
+    text-align: center;
+    font-size: 1.28rem;
+    color: white;
+    background-color: #f23456;
+    border-radius: 0.64rem;
+}
+
+/********* 未中奖 *********/
+.not-win {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7) url("../img/template2/not_win.png") 80% 5.53rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 100;
+}
+
+.not-win .next {
+    position: relative;
+    top: 20rem;
+    height: 2.43rem;
+    margin: 0 20%;
+}
+
+.not-win .next span {
+    float: left;
+    width: 48%;
+    height: 2.43rem;
+    margin-right: 4%;
+    line-height: 2.43rem;
+    text-align: center;
+    font-size: 1.28rem;
+    color: #7b7a7a;
+    background-color: white;
+    border-radius: 0.64rem;
+}
+
+.not-win .next em {
+    float: left;
+    width: 48%;
+    height: 2.43rem;
+    line-height: 2.43rem;
+    text-align: center;
+    font-size: 1.28rem;
+    color: white;
+    background-color: #f23456;
+    border-radius: 0.64rem;
+}
+
+/********* 没机会 *********/
+.no-chance {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7) url("../img/template2/not_win.png") 80% 6.53rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 100;
+}
+
+/********* 再来一次 *********/
+.again {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7) url("../img/template2/again.png") 80% 5.53rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 100;
+}
+
+.again span {
+    position: relative;
+    top: 21rem;
+    display: block;
+    width: 29%;
+    height: 2.43rem;
+    margin: 0 auto;
+    line-height: 2.43rem;
+    text-align: center;
+    font-size: 1.28rem;
+    color: white;
+    background-color: #f23456;
+    border-radius: 0.64rem;
+}
+
+/********* 求分享 *********/
+.share {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7) url("../img/template2/share.png") 60% 1rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 1000;
+}

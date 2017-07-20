@@ -1,0 +1,148 @@
+/* 
+* @Author: anchen
+* @Date:   2015-12-11 09:41:38
+* @Last Modified by:   anchen
+* @Last Modified time: 2015-12-22 16:27:30
+*/
+@charset 'utf-8';
+html,
+body,
+.wrap {
+    height: 100%;
+    min-width: 320px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+header {
+    height: 11.51rem;
+    padding-top: 2rem;
+    box-shadow: 0 1px 0 0 #a1a1a1;
+}
+
+header h1 {
+    margin-bottom: 0.6rem;
+    line-height: 3.2rem;
+    font-weight: bolder;
+    font-size: 2.84rem;
+    text-align: center;
+    color: #e83656;
+}
+
+header p {
+    line-height: 2.13rem;
+    font-size: 1.2rem;
+    color: #777070;
+    text-align: center;
+}
+
+article .prize {
+    width: 100%;
+    display: block;
+    height: 12.44rem;
+}
+
+article section {
+    height: 10.49rem;
+    padding: 1.24rem 9% 0;
+    background-color: #3e3a3a;
+}
+
+article section ul {
+    padding-bottom: 1rem;
+}
+
+article ul li {
+    float: left;
+    position: relative;
+    overflow: hidden;
+    width: 23%;
+    height: 5.05rem;
+    margin-left: 2%;
+    border: none;
+    border-radius: 50%;
+}
+
+article ul li img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5.05rem;
+    border: none;
+    border-radius: 50%;
+}
+
+/*.through {
+    z-index: 1000;
+}*/
+article ul li span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 5.05rem;
+    line-height: 5.05rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: white;
+    background-color: #6c6969;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+article ul li em {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 5.05rem;
+    line-height: 5.05rem;
+    text-align: center;
+    font-size: 2.13rem;
+    color: #f2f2f2;
+    background-color: #6c6969;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+article section p {
+    padding: 0.5rem 0 1.38rem;
+    line-height: 1.28rem;
+    font-size: 1rem;
+    text-align: center;
+    color: #dcd9d9;
+}
+
+footer {
+    padding: 2.35rem 0 1.17rem;
+}
+
+footer span {
+    display: block;
+    width: 49%;
+    height: 2.95rem;
+    margin: 0 auto;
+    line-height: 2.95rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fefefe;
+    border-radius: 5%/0.53rem;
+    background-color: #e83656;
+}
+
+.wrap .share {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background: rgba(0, 0, 0, 0.7) url("../img/bgc/prompt.png") 60% 1rem no-repeat;
+    background-size: 75% 30%;
+    z-index: 10000;
+}
