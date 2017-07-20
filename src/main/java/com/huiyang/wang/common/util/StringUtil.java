@@ -78,7 +78,7 @@ public class StringUtil {
 		int index = 0;
 		while (it.hasNext()) {
 			index++;
-			String temp = (String) it.next();
+			String temp = it.next();
 			if (index == set.size()) {
 				sb.append(temp);
 			} else {

@@ -25,7 +25,6 @@ import com.huiyang.wang.model.OfficialAccount;
 import com.huiyang.wang.model.PayOrder;
 import com.huiyang.wang.service.OfficialAccountManager;
 import com.huiyang.wang.service.PayService;
-import com.saysth.commons.utils.StringSubRepeatUtil;
 import com.saysth.commons.utils.json.JsonUtils;
 import com.saysth.commons.web.support.BaseController;
 import com.saysth.weixin.sdk.pay.entity.PayResponse;

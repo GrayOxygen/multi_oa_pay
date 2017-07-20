@@ -19,7 +19,6 @@ import com.saysth.weixin.sdk.web.WeixinControllerSupport;
 public class WeixinMsgController extends WeixinControllerSupport {
 	private static final Logger log = LoggerFactory.getLogger(WeixinMsgController.class);
 
-
 	@Autowired
 	private OfficialAccountMapper oAccMgr;
 	// @Autowired
@@ -27,11 +26,13 @@ public class WeixinMsgController extends WeixinControllerSupport {
 
 	/**
 	 * 服务器配置验证时，讲token和oaid appId key信息放进redis，待到消息响应时再拿
+	 * 
+	 * 这里oaid就是appid
 	 */
 	@Override
 	protected String getTokenAppidAESKey(String oaid) {
 		String info = "";
-		OfficialAccount oa = oAccMgr.getByAppId("wxf05189f68ef5d4c7");
+		OfficialAccount oa = oAccMgr.getByAppId(oaid);
 		if (oa != null) {
 			info = oa.getToken() + "," + oa.getAppId() + "," + oa.getKey();
 		}
