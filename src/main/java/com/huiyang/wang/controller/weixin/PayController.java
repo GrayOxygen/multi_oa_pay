@@ -1,6 +1,7 @@
 package com.huiyang.wang.controller.weixin;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huiyang.wang.common.entity.enums.OAType;
+import com.huiyang.wang.common.entity.enums.PayOrderStatus;
 import com.huiyang.wang.common.util.JaxbParser;
+import com.huiyang.wang.common.util.StringUtil;
 import com.huiyang.wang.model.OfficialAccount;
 import com.huiyang.wang.model.PayOrder;
 import com.huiyang.wang.service.OfficialAccountManager;
 import com.huiyang.wang.service.PayService;
+import com.saysth.commons.utils.StringSubRepeatUtil;
 import com.saysth.commons.utils.json.JsonUtils;
 import com.saysth.commons.web.support.BaseController;
 import com.saysth.weixin.sdk.pay.entity.PayResponse;
@@ -87,32 +92,68 @@ public class PayController extends BaseController {
 	@RequestMapping("/multiPay")
 	public String multiPay(HttpServletRequest req, String source) throws Exception {
 		System.out.println(source);
-		String openId = getOpenId(req);
-		OfficialAccount oa = oaMgr.getOfficialAccount("0");
+		// OfficialAccount oa = oaMgr.getOfficialAccount("0");
+		OfficialAccount mchOA = oaMgr.getOfficialAccountByAppid("wx737ad133237892d7");
 
-		Map<String, String> wx = oaMgr.getWX(oa, getUrl(req));
+		Map<String, String> wx = oaMgr.getWX(mchOA, getUrl(req));
 
 		// 获取链接相关的公众号信息，生成JSAPI所需参数返回给页面
 		req.setAttribute("wx", wx);
-		req.setAttribute("oa", oa);
+		req.setAttribute("oa", mchOA);
+		req.setAttribute("source", source);
 
 		return "/h5/multiPayInSingleOA";
 	}
 
 	@RequestMapping("/multiPayOrder.json")
 	@ResponseBody
-	public Map<String, String> multiPayOrder(Integer amount, HttpServletRequest req) throws Exception {
+	public Map<String, String> multiPayOrder(Integer amount, String source, HttpServletRequest req) throws Exception {
 		String openId = getOpenId(req);
-		OfficialAccount oa = oaMgr.getOfficialAccount("0");
+		String unionId = geUnionId(req);
+		OfficialAccount childMchOA = null;
+		OfficialAccount mchOA = oaMgr.getOfficialAccountByAppid("wx737ad133237892d7");
+		if (OAType.XINJI.getName().equalsIgnoreCase(source)) {
+			childMchOA = oaMgr.getOfficialAccountByAppid("wxf05189f68ef5d4c7");
+		}
+		if (OAType.BOHUI.getName().equalsIgnoreCase(source)) {
+			childMchOA = oaMgr.getOfficialAccountByAppid("wx10a590dea6c4eae5");
+		}
+		if (OAType.XINHUAN.getName().equalsIgnoreCase(source)) {
+			childMchOA = oaMgr.getOfficialAccountByAppid("wx40d365f3b7ba0644");
+		}
+		if (OAType.YINGHUANG.getName().equalsIgnoreCase(source)) {
+			childMchOA = oaMgr.getOfficialAccountByAppid("wxcd907509d4344b06");
+		}
 
 		String notifyUrl = StringUtils.substringBeforeLast(req.getRequestURL().toString(), "/") + "/multiNotify.do";
-		PayOrder order = payService.multiPay(openId, null, null, null, amount, req.getRemoteAddr(), notifyUrl);
+		PayOrder order = payService.multiPay(openId, unionId, mchOA, childMchOA, amount, req.getRemoteAddr(), notifyUrl);
 
 		log.info("Order committed: {}", JsonUtils.toJson(order));
 
 		String pkg = "prepay_id=" + order.getPrepayId();
-		Map<String, String> wx = SignUtil.signPay(oa.getAppId(), pkg, oa.getKey());
+		Map<String, String> wx = SignUtil.signPay(mchOA.getAppId(), pkg, mchOA.getKey());
+		wx.put("payId", order.getId());
 		return wx;
+	}
+
+	@RequestMapping("/successPayStatus")
+	@ResponseBody
+	public void successPayStatus(@RequestBody String payId, HttpServletResponse res) {
+		if (StringUtils.isBlank(payId)) {
+			log.info("payId is null  更新支付状态失败");
+			return;
+		}
+		String id=payId.split("=")[1];
+		Map<String, Object> map = new HashMap<>();
+		map.put("id_in", StringUtil.strToList(id));
+		if (payService.count(map) == 1) {
+			PayOrder order = new PayOrder();
+			order.setId(id);
+			order.setStatus(PayOrderStatus.SUCCESS);
+			payService.update(order);
+			log.info("修改状态成功");
+		}
+		log.info(payId+"修改状态完成");
 	}
 
 	@RequestMapping("/multiNotify")

@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 
 import com.saysth.commons.http.HttpHelper;
 import com.saysth.commons.utils.StrUtils;

@@ -15,6 +15,12 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/app_static/**" location="/app_static/" />
+	<resources mapping="MP_verify_t7jTcCfG4lfNho7X.txt" location="/MP_verify_t7jTcCfG4lfNho7X.txt" />
+	<resources mapping="MP_verify_TS0fUX8bHPXRX9Ia.txt" location="/MP_verify_TS0fUX8bHPXRX9Ia.txt" />
+	<resources mapping="MP_verify_aZ81KL97qA8qPOy7.txt" location="/MP_verify_aZ81KL97qA8qPOy7.txt" />
+	<resources mapping="MP_verify_TS0fUX8bHPXRX9Ia.txt" location="/MP_verify_TS0fUX8bHPXRX9Ia.txt" />
+	<resources mapping="MP_verify_hZHjcBDhg5b9M7tG.txt" location="/MP_verify_hZHjcBDhg5b9M7tG.txt" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->

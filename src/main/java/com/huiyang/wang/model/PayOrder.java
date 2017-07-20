@@ -52,7 +52,7 @@ public class PayOrder extends UnDeletedEntity<String> {
 	private Integer couponCount;// 代金券或立减优惠使用数量
 	private String transactionId;// 微信支付订单号
 	private String timeEnd;// 支付完成时间
-
+	private String unionId;// union id
 	private TradeState tradeState;// 订单的交易状态
 
 	private PayOrderStatus status;// 系统中的订单状态
@@ -371,6 +371,14 @@ public class PayOrder extends UnDeletedEntity<String> {
 
 	public void setMtime(Date mtime) {
 		this.mtime = mtime;
+	}
+
+	public String getUnionId() {
+		return unionId;
+	}
+
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
 	}
 
 }

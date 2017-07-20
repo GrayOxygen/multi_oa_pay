@@ -12,7 +12,7 @@
     <script src="${app_static}/h5/pay/js/fx.js" type="text/javascript" charset="utf-8"></script>
     <script src="${app_static}/h5/pay/js/fx_methods.js" type="text/javascript" charset="utf-8"></script>
     <script src="${app_static}/h5/pay/js/common.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
         wx.config({
             debug: false,
@@ -22,10 +22,6 @@
             signature: '${(wx.signature)!}',
             jsApiList: [
                 'checkJsApi',
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage',
-                'onMenuShareQQ',
-                'onMenuShareWeibo',
                 'chooseWXPay'
             ]
         });
@@ -37,19 +33,44 @@
                 signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                 paySign: data.paySign, // 支付签名
                 success: function (res) {
-                alert("支付成功！")
                     // 支付成功后的回调函数
                     if (res.errMsg == "chooseWXPay:ok") {
-                        //支付成功
+                        	//支付成功
+                           $.ajax({
+					            url: '${ctx}/wx/successPayStatus.json',
+					            type: 'post',
+					            dataType: 'json',
+					            data: {
+					                'payId': data.payId  
+					            },
+					            success: function (data) {
+					            		alert("支付成功！")
+					            },
+					            error: function (e) {
+					                alert('网络连接异常，请稍后重试');
+					            }
+					        });
                     } else {
                         alert('支付失败！' + res.errMsg);
                     }
                 },
                 cancel: function (res) {
-                    alert('支付取消');
+                	alert(res)
+                   // alert('支付取消');
                 }
             });
         }
+        
+		        if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+		        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		    }
+		 }else{
+		    onBridgeReady();
+		 } 
     </script>
 
 
@@ -383,7 +404,8 @@
             type: 'post',
             dataType: 'json',
             data: {
-                'amount': money 
+                'amount': money ,
+                'source':'${(source)!}'
             },
             success: function (data) {
                 //onBridgeReady(data);

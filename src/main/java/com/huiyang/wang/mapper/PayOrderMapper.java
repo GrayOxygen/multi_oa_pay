@@ -152,7 +152,35 @@ public interface PayOrderMapper {
 			+ "#{notifyUrl},#{tradeType},#{productId},#{openId},#{subOpenId},#{status},#{tradeState},#{ctime},#{mtime})") //
 	void save(PayOrder order);
 
-	@Select("SELECT COUNT(1) FROM pay_order ")
-	Long count(Map<String, Object> map);
+	@Select("<script>" + //
+			" SELECT COUNT(1) FROM pay_order" + //
+			" <where>" + //
+			"<if test='startTime != null\'>" + //
+			"    AND pay_order.ctime >= #{startTime}" + //
+			" </if>" + //
+			" <if test='endTime != null'>" + //
+			"     AND pay_order.cTime &lt;= #{endTime}" + //
+			" </if>" + //
+			" <if test='companyId != null'>" + //
+			"     AND pay_order.companyId = #{companyId}" + //
+			" </if>" + //
+			" <if test='shopId != null'>" + //
+			"     AND pay_order.shopId  = #{shopId}" + //
+			" </if>" + //
+			" <if test='cashierId != null'>" + //
+			"   AND pay_order.cashierId = #{cashierId}" + //
+			"</if>" + //
+			"<if test='status != null'>" + //
+			"   AND pay_order.status = #{status}" + //
+			"</if>" + //
+			" <if test='id_in != null'>" + //
+			"AND pay_order.id IN" + //
+			"<foreach collection='id_in' index='index' item='item' open='(' separator=',' close=')'>" + //
+			"	#{item}" + //
+			"</foreach>" + //
+			"</if>" + //
+			"</where>" + //
+			"</script>")
+	Long count(Map<String, Object> map);// id_in存放id的字符串list
 
 }

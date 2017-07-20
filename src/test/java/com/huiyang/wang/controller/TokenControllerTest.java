@@ -16,8 +16,6 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.validation.BindingResult;
 
 import com.huiyang.wang.controller.weixin.common.TokenController;
-import com.saysth.commons.utils.EncodeUtils;
-import com.saysth.weixin.sdk.entity.OfficialAccountBean;
 
 @TestPropertySource("/application.properties")
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml" })

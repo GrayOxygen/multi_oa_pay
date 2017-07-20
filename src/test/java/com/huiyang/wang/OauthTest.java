@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.huiyang.wang.common.exception.AppException;
 import com.huiyang.wang.common.util.OauthUrlUtils;
 import com.huiyang.wang.model.OfficialAccount;
-import com.huiyang.wang.model.PayOrder;
 import com.huiyang.wang.service.OfficialAccountManager;
 import com.huiyang.wang.service.PayService;
 import com.saysth.weixin.sdk.exception.WeixinException;
@@ -25,7 +24,7 @@ public class OauthTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
 	private PayService payService;
 	@Autowired
-	private WeixinService  weixinService;
+	private WeixinService weixinService;
 
 	@Test
 	public void oauth() {
@@ -50,16 +49,10 @@ public class OauthTest extends AbstractJUnit4SpringContextTests {
 
 		System.out.println(OauthUrlUtils.getOauthBaseUrl("wx40d365f3b7ba0644", "/wx/multiPay.do?source=xinhuan"));
 		System.out.println(OauthUrlUtils.getOauthBaseUrl("wx10a590dea6c4eae5", "/wx/multiPay.do?source=bohui"));
+		System.out.println(OauthUrlUtils.getOauthBaseUrl("wxf05189f68ef5d4c7", "/wx/multiPay.do?source=xinji"));
 
 		// System.out.println(OauthUrlUtils.getOauthBaseUrl(oa.getAppId(),
 		// "/wx/multiPay.do?busiType=xinji"));
-	}
-
-	// 支付是否成功
-	@Test
-	public void testPay() throws AppException {
-		String notifyUrl = "http://17208t693k.iok.la/pay/wx/notify.do";
-		PayOrder order = payService.multiPay("xxxxa", "wx737ad133237892d7", "1483579272", "1483848192", 1, "127.0.0.1", notifyUrl);
 	}
 
 	@Test
@@ -70,7 +63,7 @@ public class OauthTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	@Test
-	public void teddd(){
-System.out.println(weixinService.getAccessToken("wx737ad133237892d7", "af7b6b5474fc4cba69682344500c1b98"));
+	public void teddd() {
+		System.out.println(weixinService.getAccessToken("wx737ad133237892d7", "af7b6b5474fc4cba69682344500c1b98"));
 	}
 }

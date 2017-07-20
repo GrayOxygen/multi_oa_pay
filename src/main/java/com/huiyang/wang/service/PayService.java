@@ -48,21 +48,21 @@ public class PayService implements InitializingBean {
 	}
 
 	@Transactional
-	public PayOrder multiPay(String openId, String parentAppId, String parentMchId, String subMchId, Integer amount, String spBillCreateIp, String notifyUrl) throws AppException {
-
-		OfficialAccount oa = oaMgr.getOfficialAccount("0");
-		OfficialAccount childOA = oaMgr.getOfficialAccount("1");
+	public PayOrder multiPay(String openId, String unionId, OfficialAccount mchOA, OfficialAccount childMchOA, Integer amount, String spBillCreateIp, String notifyUrl)
+			throws AppException {
 		Assert.hasText(openId, "openId must not null");
 		Assert.notNull(amount, "amount must not null");
 
 		PayOrder order = new PayOrder();
 		// order.setAppId(oa.getAppId());
 		// order.setMchId(oa.getMchId());
-		order.setAppId(oa.getAppid());
-		order.setMchId(oa.getMchId());
+		order.setAppId(mchOA.getAppid());
+		order.setMchId(mchOA.getMchId());
 		order.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		order.setSubAppId(childOA.getAppId());
-		order.setSubMchId(childOA.getMchId());
+		order.setSubAppId(childMchOA.getAppId());
+		order.setSubMchId(childMchOA.getMchId());
+		order.setSubOpenId(openId);
+
 		order.setTradeType(TradeType.JSAPI);
 		order.setStatus(PayOrderStatus.CREATED);
 		order.setNonceStr(StrUtils.getShortUUID());
@@ -71,15 +71,15 @@ public class PayService implements InitializingBean {
 		order.setDetail("测试");
 		order.setProductId("1");
 		// order.setOpenId(openId);
-		order.setSubOpenId(openId);
 		order.setTotalFee(amount);
 		order.setSpBillCreateIp(spBillCreateIp);
 		order.setNotifyUrl(notifyUrl);
 		order.setCtime(new Date());
+		order.setUnionId(unionId);
 		payOrderMapper.save(order);
 		try {
 			UnifiedOrder payPackage = order.toUnifiedOrder();
-			UnifiedOrderResult result = PayApi.commitOrder(payPackage, oa.getKey());
+			UnifiedOrderResult result = PayApi.commitOrder(payPackage, mchOA.getKey(), mchOA.getMchId());
 			if (result.isSuccess()) {
 				order.setStatus(PayOrderStatus.COMMITTED);
 				order.setPrepayId(result.getPrepay_id());
@@ -215,6 +215,10 @@ public class PayService implements InitializingBean {
 
 	public Long count(Map<String, Object> map) {
 		return payOrderMapper.count(map);
+	}
+
+	public void update(PayOrder order) {
+		payOrderMapper.update(order);
 	}
 
 }

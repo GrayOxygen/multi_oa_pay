@@ -1,6 +1,5 @@
 package com.huiyang.wang;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
