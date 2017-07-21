@@ -66,9 +66,9 @@ public class PayService implements InitializingBean {
 		order.setTradeType(TradeType.JSAPI);
 		order.setStatus(PayOrderStatus.CREATED);
 		order.setNonceStr(StrUtils.getShortUUID());
-		order.setAttach("测试");
-		order.setBody("测试");
-		order.setDetail("测试");
+		order.setAttach("test");
+		order.setBody("test");
+		order.setDetail("test");
 		order.setProductId("1");
 		// order.setOpenId(openId);
 		order.setTotalFee(amount);
@@ -80,6 +80,7 @@ public class PayService implements InitializingBean {
 		try {
 			UnifiedOrder payPackage = order.toUnifiedOrder();
 			UnifiedOrderResult result = PayApi.commitOrder(payPackage, mchOA.getKey(), mchOA.getMchId());
+			log.info("已经提交订单了");
 			if (result.isSuccess()) {
 				order.setStatus(PayOrderStatus.COMMITTED);
 				order.setPrepayId(result.getPrepay_id());
